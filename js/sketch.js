@@ -255,7 +255,7 @@ function reset(grid) {
  * 
  * @param {function} searchFunction The search function that will be executed.
  */
-function performSearch(searchFunction) {
+function performSearch(searchFunction, openSet) {
   // only run if both start and end nodes were selected
   if (!start || !end) {
     console.log("Make sure to select both start and end nodes!");
