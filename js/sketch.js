@@ -28,7 +28,7 @@ const hasDiagonals = false;
 let grid;
 /**
  * A collection of the nodes that will be checked later. Changing the actual data structure
- * will change the behaviour of the algorithm; using a Heap will make it a Dijkstra/A*, 
+ * will change the behaviour of the algorithm; using a Heap will make it a Dijkstra/A*,
  * depending on the heuristic used, using a Stack will make it a DFS.
  */
 let openSet;
@@ -76,10 +76,10 @@ function draw() {
 
 /**
  * Creates a grid of nodes having side length of size.
- * 
+ *
  * @param {number} size The length of the square, this will help the function determine the amount
  *                      of nodes in the grid.
- * 
+ *
  * @returns {Node[][]} A matrix of nodes.
  */
 function createGrid(size) {
@@ -92,7 +92,11 @@ function createGrid(size) {
 
     for (let x = 0; x < amtX; x++) {
       // creating a new node at (x*size, y*size)
-      grid[y][x] = new Node(createVector(x * size, y * size), size, hasDiagonals);
+      grid[y][x] = new Node(
+        createVector(x * size, y * size),
+        size,
+        hasDiagonals
+      );
 
       // top and left
       if (grid[y - 1]) {
@@ -124,9 +128,9 @@ function createGrid(size) {
 
 /**
  * Shows a matrix of nodes using the colors defined by the user.
- * 
+ *
  * @see p5.Color
- * 
+ *
  * @param {Node[][]} grid           The matrix of nodes to be shown.
  * @param {boolean}  hasDiagonals   If the program is considering diagonal paths.
  * @param {p5.Color} defaultColor   If hasDiagonals is false, this will be the color of the nodes
@@ -153,11 +157,11 @@ function showGrid(grid, hasDiagonals, defaultColor, closedSetColor) {
 
 /**
  * Paints all nodes within a data structure using the color defined by the user.
- * 
+ *
  * @see p5.Color
- * 
+ *
  * @param {*} dataStructure The data structure being used by the search algortighm.
- * @param {p5.Color} col           The color that will be used to paint the nodes inside that data 
+ * @param {p5.Color} col           The color that will be used to paint the nodes inside that data
  *                          structure.
  */
 function showDataStructure(dataStructure, col) {
@@ -175,12 +179,12 @@ function showDataStructure(dataStructure, col) {
 /**
  * Traces a path starting from a node and going to its parent until it reahces a node that has
  * no parent.
- * 
+ *
  * @see p5.Color
- * 
- * @param {Node}     end 
- * @param {boolean}  hasDiagonals 
- * @param {p5.Color} col 
+ *
+ * @param {Node}     end
+ * @param {boolean}  hasDiagonals
+ * @param {p5.Color} col
  */
 function tracePath(end, hasDiagonals, col) {
   if (!end) {
@@ -209,24 +213,24 @@ function tracePath(end, hasDiagonals, col) {
       vertex(walker.pos.x + walker.size / 2, walker.pos.y + walker.size / 2);
       walker = walker.parent;
     }
-    endShape()
+    endShape();
   }
 }
 
 /**
  * Awaits a certain amount of time in milliseconds.
- * 
+ *
  * @param {number} ms The amount of time that the program will stall for
  */
 async function sleep(ms) {
   if (ms === 0) return;
-  return new Promise((resolve) => setTimeout(resolve, ms));
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 /**
  * Resets all of the aplication's parameters, such as the start and end nodes, as well as all the
  * graph's properties, like the node's parent, it's costs and whether it was visited or not.
- * 
+ *
  * @param {Node[][]} grid The reference to the graph.
  */
 function reset(grid) {
@@ -250,9 +254,9 @@ function reset(grid) {
 /**
  * Since search process is the same for all search algorithms and the only difference is the data
  * structure used, this function makes a generic call for the search function received as parameter.
- * It also displays whether the node was found or not, as well as the time taken to execute the 
+ * It also displays whether the node was found or not, as well as the time taken to execute the
  * search.
- * 
+ *
  * @param {function} searchFunction The search function that will be executed.
  */
 function performSearch(searchFunction, openSet) {
@@ -263,7 +267,7 @@ function performSearch(searchFunction, openSet) {
   }
 
   isRunning = true;
-  searchFunction(start, end, openSet, delay).then((result) => {
+  searchFunction(start, end, openSet, delay).then(result => {
     isRunning = false;
 
     if (result.found) {
