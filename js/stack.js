@@ -72,6 +72,10 @@ class Stack {
 
     if (indexElem !== -1) {
       this.dataset[indexElem] = this.update(elem, newPriority);
+
+      let temp = this.dataset[0];
+      this.dataset[0] = this.dataset[indexElem];
+      this.dataset[indexElem] = temp;
     }
   }
 }
