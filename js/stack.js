@@ -61,8 +61,11 @@ class Stack {
 
   /**
    * Updates the priority of an element. This function is here because this data structure needs
-   * to be compatible with the Heap, since they are both being used by search algorithms, however
-   * for a normal stack implementation, its existence can be ignored.
+   * to be compatible with the Heap, since they are both being used by search algorithms. Also, it
+   * makes the Stack work in a bizarre way compared to a normal implementation; this is important
+   * because when this function is called, it means that elem's parent was changed, meaning that it
+   * should be at the top of the Stack to garantee that this implementation of the DFS will work in
+   * the same way as the more common implementation.
    * 
    * @param {*} elem The element whose priority will be updated.
    * @param {*} newPriority Some data that the new priority will be based on.
@@ -71,11 +74,10 @@ class Stack {
     const indexElem = this.dataset.indexOf(elem);
 
     if (indexElem !== -1) {
-      this.dataset[indexElem] = this.update(elem, newPriority);
+      let element = this.update(elem, newPriority);
 
-      let temp = this.dataset[0];
-      this.dataset[0] = this.dataset[indexElem];
-      this.dataset[indexElem] = temp;
+      this.dataset.splice(indexElem, 1);
+      this.add(element);
     }
   }
 }

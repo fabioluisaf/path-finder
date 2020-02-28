@@ -37,7 +37,7 @@ async function search(start, end, openSet, heuristicFunction, delay) {
     min.visited = true;
     // filtering the neighbors, to get only those that we're interested in
     let minNeighbors = filteredNeighbors(min);
-
+    head = min;
     // iterate through all it's neighbors
     for (let i = 0; i < minNeighbors.length; i++) {
       let neighbor = minNeighbors[i];

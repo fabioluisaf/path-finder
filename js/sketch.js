@@ -46,6 +46,8 @@ let found = false;
  */
 let start, end;
 
+let head = null;
+
 /**
  * Initiates the program, creating a canvas and the grid of nodes that will fill all the
  * canvas space. It also sets the framerate using the previously mentioned variable.
@@ -68,6 +70,8 @@ function draw() {
 
   showGrid(grid, hasDiagonals, color(200, 200, 200), color(255, 100, 100));
   showDataStructure(openSet, color(100, 255, 100));
+
+  if (head) tracePath(head, hasDiagonals, color(0, 255, 255));
 
   if (end) tracePath(end, hasDiagonals, color(0, 255, 255));
   if (end) end.show(color(255, 0, 0));
